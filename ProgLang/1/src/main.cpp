@@ -1,6 +1,9 @@
 #include <iostream>
 #include <cmath>
 
+using namespace std;
+
+// Template function
 template<typename T>
 T func(T a, T b) {
     T x = pow(a + b, 4);
@@ -11,14 +14,19 @@ T func(T a, T b) {
 
 
 int main() {
-    float fa = 100, fb = 0.001;
-    double da = 100, db = 0.001;
-    std::cout << func(fa, fb) << '\n' << func(da, db) << '\n';
+    float floatA = 100, floatB = 0.001;
+    double doubleA = 100, doubleB = 0.001;
+    cout << "TASK 1\n";
+    cout << "func(floatA, floatB) = " << func(floatA, floatB) << '\n';
+    cout << "func(doubleA, doubleB) = " << func(doubleA, doubleB) << '\n';
 
+    cout << "\nTASK 2\n";
     double m, n;
-    std::cout << "print: m n : ";
-    std::cin >> m >> n;
-    std::cout << (++n*++m) << '\n'; // ++n * ++m
-    std::cout << (m++<n) << '\n'; // m++ < n
-    std::cout << (n++>m) << '\n'; // n++ > m
+    cout << "print m:";
+    cin >> m;
+    cout << "print n:";
+    cin >> n;
+    cout << "(++n*++m) = " << (++n * ++m);
+    cout << "\n(m++<n) = " << (m++ < n);
+    cout << "\n(n++>m) = " << (n++ > m);
 }
