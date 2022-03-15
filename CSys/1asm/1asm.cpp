@@ -1,39 +1,55 @@
 ﻿#include <iostream>
+#include <ctime>
 
-using namespace std;
+char text[] = "HelloWorld";
+unsigned int half = strlen(text) / 2;
+
+void coup_halfs_asm() {
+	__asm {
+		mov  ecx, half
+		mov  edi, half
+		mov  esi, 0
+		forbegin:
+		mov  al, byte ptr[text + esi]
+			mov  dl, byte ptr[text + edi]
+			mov  byte ptr[text + edi], al
+			mov  byte ptr[text + esi], dl
+			inc  esi
+			inc  edi
+			loop forbegin
+	}
+}
+
+void coup_halfs_cxx() {
+	char buffer;
+	int j = half;
+	for (int i = 0; i < half; i++, j++) {
+		buffer = text[i];
+		text[i] = text[j];
+		text[j] = buffer;
+	}
+}
 
 
 int main() {
-	char text[]     = "OhHelloMyWorld";
-	char text_new[] = "              ";
+	std::cout << "Input pure: " << text << "\n";
+	coup_halfs_asm();
+	std::cout << "Output asm: " << text << "\n";
+	coup_halfs_cxx();
+	std::cout << "Output c++: " << text << "\n";
 
-	unsigned int len_ = strlen(text);
-	unsigned int half = len_ / 2;
-	unsigned int half2 = len_ - len_ / 2;
-
-	__asm {
-			mov  esi, 0
-			mov  edi, half2
-			mov  ecx, half
-		forbegin1:
-			mov  al, byte ptr text[esi]
-			mov  byte ptr text_new[edi], al
-			inc  esi
-			inc  edi
-			loop forbegin1
-
-			mov  esi, half
-			mov  edi, 0
-			mov  ecx, half2
-		forbegin2:
-			mov  al, byte ptr text[esi]
-			mov  byte ptr text_new[edi], al
-			inc  esi
-			inc  edi
-			loop forbegin2
+	std::cout << "\nTime testing\n";
+	unsigned int start_time = clock();
+	for (int i = 0; i < 1000000; i++) {
+		coup_halfs_asm();
 	}
-	cout << " Input: " << text << '\n';
-	cout << "Output: " << text_new;
+	std::cout << "asm 1kk loops: " << clock() - start_time << " ms\n";
+	
+	start_time = clock();
+	for (int i = 0; i < 1000000; i++) {
+		coup_halfs_cxx();
+	}
+	std::cout << "c++ 1kk loops: " << clock() - start_time << " ms\n";
 
 	return 0;
 }
