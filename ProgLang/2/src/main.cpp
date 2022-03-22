@@ -4,20 +4,20 @@
 
 using namespace std;
 
-const char FILENAME[] = "..\\files\\Lorem.txt";
-//const char FILENAME[] = "..\\files\\Alphabet.txt";
-const char FILENAME_NEW[] = "..\\files\\NewFile.txt";
-const long long BUFFER_SIZE = 1024;
-char buffer[BUFFER_SIZE + 1];
-
 
 int main() {
+    const char FILENAME[] = "..\\files\\Lorem.txt";
+    //const char FILENAME[] = "..\\files\\Alphabet.txt";
+    const char FILENAME_NEW[] = "..\\files\\NewFile.txt";
+    const long long BUFFER_SIZE = 1024;
+    char buffer[BUFFER_SIZE + 1];
+
     ifstream file(FILENAME, ios_base::ate | ios_base::binary);  // Бинарное открытие файла с конца для ввода
-    ofstream fileNew(FILENAME_NEW, ios_base::trunc | ios_base::binary);  // Бинарное открытие файла для вывода
+    ofstream fileNew(FILENAME_NEW, ios_base::binary);  // Бинарное открытие файла для вывода
 
     if (!file.is_open() or !fileNew.is_open()) {  // Проверка на открытие
-        cout << "Some of files are not found";
-        return -1;
+        cout << "File was not found";
+        return 0;
     }
 
     long long cursor = file.tellg() - BUFFER_SIZE;  // Курсор файла = BUFFER_SIZE с конца
@@ -38,4 +38,6 @@ int main() {
 
     file.close();  // Закрытие файлов
     fileNew.close();
+
+    return 0;
 }
