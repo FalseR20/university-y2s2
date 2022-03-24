@@ -5,7 +5,7 @@
 class Product {
 public:
     Product();
-    Product(const char *name, const int count, const float price);
+    Product(const char *name, int count, float price);
     Product(const Product &product);
     ~Product();
 
@@ -16,8 +16,8 @@ public:
     float getPrice() const;
 
     void setName(const char* name);
-    void setCount(const int count);
-    void setPrice(const float price);
+    void setCount(int count);
+    void setPrice(float price);
 
 protected:
     char *name_;
