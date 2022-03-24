@@ -1,9 +1,5 @@
-# cmake_minimum_required(VERSION 3.13)  # CMake version check
-project(1)               # Create project "simple_example"
-set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
+project(ProgLang) # Set project name
 
-# Add main.cpp file of project root directory as source file
-# set(SOURCE_FILES main.cpp)
+set(CMAKE_CXX_STANDARD 14) # Set C++ version 14
 
-# Add executable target with source files listed in SOURCE_FILES variable
-add_executable(1 main.cpp Product.cpp Product.h)
+add_executable(ProgLang main.cpp Product.cpp Product.h) # Adding files
