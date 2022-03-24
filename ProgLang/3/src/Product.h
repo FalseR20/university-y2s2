@@ -1,27 +1,29 @@
-#ifndef INC_1_PRODUCT_H
-#define INC_1_PRODUCT_H
+#ifndef PRODUCT_H
+#define PRODUCT_H
 
 
 class Product {
 public:
     Product();
-    Product(const char *name, int count, float price);
-    Product(Product &product);
+    Product(const char *name, const int count, const float price);
+    Product(const Product &product);
     ~Product();
 
-    char* getName();
-    int getCount();
-    float getPrice();
+    void print() const;
 
-    void setName(char* name);
-    void setCount(int count);
-    void setPrice(float price);
+    char* getName() const;
+    int getCount() const;
+    float getPrice() const;
+
+    void setName(const char* name);
+    void setCount(const int count);
+    void setPrice(const float price);
 
 protected:
-    char *name;
-    int count;
-    float price;
+    char *name_;
+    int count_;
+    float price_;
 };
 
 
-#endif //INC_1_PRODUCT_H
+#endif //PRODUCT_H

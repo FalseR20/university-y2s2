@@ -1,47 +1,64 @@
 #include <cstring>
+#include <cstdio>
+
 #include "Product.h"
 
-Product::Product() : count(0), price(0) {
-    name = new char[8];
-    strcpy(name, "Unnamed");
+
+Product::Product() : count_(0), price_(0) {
+    name_ = new char[8];
+    strcpy(name_, "Unnamed");
+    printf("Product \"%s\" created (without parameters)\n", name_);
 }
 
-Product::Product(const char *name, int count, float price) : count(count), price(price) {
-    this->name = new char[strlen(name)];
-    strcpy(this->name, name);
+Product::Product(const char *name, const int count, const float price) : count_(count), price_(price) {
+    name_ = new char[strlen(name)];
+    strcpy(name_, name);
+    printf("Product \"%s\" created (with parameters)\n", name_);
 }
 
-Product::Product(Product &product) : count(product.count), price(product.price) {
-    name = new char[strlen(product.name)];
-    strcpy(name, product.name);
+Product::Product(const Product &product) : count_(product.count_), price_(product.price_) {
+    name_ = new char[strlen(product.name_)];
+    strcpy(name_, product.name_);
+    printf("Product \"%s\" created (by coping)\n", name_);
 }
 
 Product::~Product() {
-    delete[] name;
+    printf("Product \"%s\" deleted\n", name_);
+    delete[] name_;
 }
 
-char *Product::getName() {
-    auto buf = new char[strlen(name)];
-    strcpy(buf, name);
+void Product::print() const {
+    printf("Product \"%s\": count = %d, price = %.2f\n", name_, count_, price_);
+}
+
+char *Product::getName() const {
+    auto name = new char[strlen(name_)];
+    strcpy(name, name_);
     return name;
 }
 
-int Product::getCount() {
-    return 0;
+int Product::getCount() const {
+    return count_;
 }
 
-float Product::getPrice() {
-    return 0;
+float Product::getPrice() const {
+    return price_;
 }
 
-void Product::setName(char *name) {
-
+void Product::setName(const char *name) {
+    printf("Product \"%s\": changed name(%s -> %s)\n", name_, name_, name);
+    delete[] name_;
+    name_ = new char[strlen(name)];
+    strcpy(name_, name);
 }
 
-void Product::setCount(int count) {
-
+void Product::setCount(const int count) {
+    printf("Product \"%s\": changed count(%d -> %d)\n", name_, count_, count);
+    count_ = count;
 }
 
-void Product::setPrice(float price) {
-
+void Product::setPrice(const float price) {
+    printf("Product \"%s\": changed price (%.2f -> %.2f)\n", name_, price_, price);
+    price_ = price;
 }
+
