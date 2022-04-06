@@ -1,9 +1,7 @@
-#include <string>
-
 #include "classes.h"
 
 int main() {
-    Place tops;
-    Place brest("Brest");
-    Place brestCopy(brest);
+    Region brest_region("Brest region", "BLR");
+    City brest("Brest", brest_region, 340000);
+    brest_region.showAll();
 }
