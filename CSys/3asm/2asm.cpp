@@ -16,7 +16,7 @@ void change_asm(const char* text, const char letter) {
     char textin[100];
     char textout[100];
     strcpy(textin, text);
-    int len_ = strlen(text);
+    int len_ = strlen(text) + 1;
     cout << " input: " << textin << "\n";
 
     __asm {
@@ -25,28 +25,28 @@ void change_asm(const char* text, const char letter) {
             mov edi, 0
 
         forbegin:
-            cmp textin[esi], ' '
+            cmp [textin + esi], ' '
             jne skipnext
-            mov al, textin[esi + 1]
+            mov al, [textin + esi + 1]
             cmp al, letter
             jne skipnext
         skipword:
             inc esi
             dec ecx
-            cmp textin[esi], ' '
+            cmp [textin + esi], ' '
             je forbegin
-            cmp textin[esi], '.'
+            cmp [textin + esi], '.'
             je forbegin
             jmp skipword
 
         skipnext:
-            mov al, textin[esi]
-            mov textout[edi], al
+            mov al, [textin + esi]
+            mov [textout + edi], al
             inc edi
             inc esi
             loop forbegin
 
-            mov textout[edi], '\0'
+            mov [textout + edi - 1], 0
     }
 
     cout << "output: " << textout << "\n";
