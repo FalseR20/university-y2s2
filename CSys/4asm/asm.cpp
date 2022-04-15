@@ -5,21 +5,19 @@ using namespace std;
 int main()
 {
     const float ONE = 1, TWO = 2, FOUR = 4, MINUSFIVE = -5, FIFTEEN = 15;
-    float x;
-    float y;
-    cout << "Print x and y (%d %d): ";
+    float x, y, u;
+    cout << "Print x and y (%f %f): ";
     cin >> x >> y;
-    float u;
 
     __asm {
         finit
         fld  [x]
         fsub [y]
-        fcom MINUSFIVE
+        fcom [MINUSFIVE]
         fstsw ax
         sahf
         jb p2
-        fcom FIFTEEN
+        fcom [FIFTEEN]
         fstsw ax
         sahf
         jbe p3
