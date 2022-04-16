@@ -1,7 +1,9 @@
 #include "classes.h"
 
 int main() {
-    Region brest_region("Brest region", "BLR");
+    Region brest_region("Brest region", "Belarus");
     City brest("Brest", brest_region, 340000);
-    brest_region.showAll();
+    Region mid_atlantic("Mid-Atlantic", "USA");
+    Metropolis new_york("New York City", mid_atlantic, 10700000, 15);
+    Place::showAll();
 }

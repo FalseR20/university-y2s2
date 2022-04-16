@@ -8,7 +8,7 @@ class Place {
 public:
     Place();
 
-    Place(std::string name);
+    explicit Place(std::string name);
 
     Place(Place &place);
 
@@ -50,7 +50,7 @@ class City : public Place {
 public:
     City();
 
-    City(std::string name, Region &region, uint nPeoples);
+    City(std::string name, Region& region, unsigned int nPeoples);
 
     City(City &city);
 
@@ -61,14 +61,14 @@ public:
 protected:
 
     Region region_;
-    uint nPeoples_;
+    unsigned int nPeoples_;
 };
 
 class Metropolis : public City {
 public:
     Metropolis();
 
-    Metropolis(std::string name, Region &region, uint nPeoples, ushort top);
+    Metropolis(std::string name, Region &region, unsigned int nPeoples, unsigned short top);
 
     Metropolis(Metropolis &metropolis);
 
@@ -77,7 +77,7 @@ public:
     ~Metropolis();
 
 protected:
-    ushort top_;
+    unsigned short top_;
 };
 
 
