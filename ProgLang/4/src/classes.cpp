@@ -26,8 +26,9 @@ Place::Place() : name_("TOP SECRET") {
     add();
 }
 
-Place::Place(std::string name) : name_(std::move(name)) {
-    add();
+Place::Place(std::string name, bool doAdd) : name_(std::move(name)) {
+    if (doAdd)
+        add();
 }
 
 Place::Place(Place &place) : name_(std::move(place.name_)) {
@@ -39,7 +40,8 @@ Place::~Place() = default;
 
 Region::Region() : Place(), country_("Abobia") {}
 
-Region::Region(std::string name, std::string country) : Place(std::move(name)), country_(std::move(country)) {}
+Region::Region(std::string name, std::string country, bool doAdd) : Place(std::move(name), doAdd),
+                                                                    country_(std::move(country)) {}
 
 Region::Region(Region &region) : Place(region.name_), country_(region.country_) {}
 
@@ -59,7 +61,8 @@ City::City(City &city) :
         Place(std::move(city.name_)), region_(city.region_), nPeoples_(city.nPeoples_) {}
 
 void City::print() const {
-    std::cout << "City \"" << name_ << "\" with " << nPeoples_ << " people in " << region_.name_ << " of " << region_.country_ << "\n";
+    std::cout << "City \"" << name_ << "\" with " << nPeoples_ << " people in " << region_.name_ << " of "
+              << region_.country_ << "\n";
 }
 
 City::~City() = default;
@@ -74,7 +77,8 @@ Metropolis::Metropolis(Metropolis &metropolis) :
         City(metropolis.name_, metropolis.region_, metropolis.nPeoples_), top_(metropolis.top_) {}
 
 void Metropolis::print() const {
-    std::cout << "Metropolis #" << top_ << " \"" << name_ << "\" with " << nPeoples_ << " people in " << region_.name_ << " of " << region_.country_
+    std::cout << "Metropolis #" << top_ << " \"" << name_ << "\" with " << nPeoples_ << " people in " << region_.name_
+              << " of " << region_.country_
               << "\n";
 }
 

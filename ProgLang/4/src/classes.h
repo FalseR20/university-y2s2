@@ -7,20 +7,15 @@
 class Place {
 public:
     Place();
-
-    explicit Place(std::string name);
-
+    explicit Place(std::string name, bool doAdd = true);
     Place(Place &place);
-
     ~Place();
 
     static Place **places;
     static unsigned int nPlaces;
 
     virtual void print() const = 0;
-
     virtual void add() final;
-
     static void showAll();
 
 protected:
@@ -30,18 +25,13 @@ protected:
 class Region : public Place {
 public:
     Region();
-
-    Region(std::string name, std::string country);
-
+    Region(std::string name, std::string country, bool doAdd = true);
     Region(Region &region);
-
     ~Region();
-
     void print() const override;
 
 protected:
     std::string country_;
-
     friend class City;
     friend class Metropolis;
 };
@@ -49,13 +39,9 @@ protected:
 class City : public Place {
 public:
     City();
-
-    City(std::string name, Region& region, unsigned int nPeoples);
-
+    City(std::string name, Region &region, unsigned int nPeoples);
     City(City &city);
-
     ~City();
-
     void print() const override;
 
 protected:
@@ -67,14 +53,10 @@ protected:
 class Metropolis : public City {
 public:
     Metropolis();
-
     Metropolis(std::string name, Region &region, unsigned int nPeoples, unsigned short top);
-
     Metropolis(Metropolis &metropolis);
-
-    void print() const override;
-
     ~Metropolis();
+    void print() const override;
 
 protected:
     unsigned short top_;
