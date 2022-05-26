@@ -1,6 +1,5 @@
 #include <string>
 #include <iostream>
-
 #include "classes.h"
 
 
@@ -27,8 +26,9 @@ Place::Place() : name_("TOP SECRET") {
     add();
 }
 
-Place::Place(std::string name) : name_(std::move(name)) {
-    add();
+Place::Place(std::string name, bool doAdd) : name_(std::move(name)) {
+    if (doAdd)
+        add();
 }
 
 Place::Place(Place &place) : name_(std::move(place.name_)) {
@@ -37,60 +37,48 @@ Place::Place(Place &place) : name_(std::move(place.name_)) {
 
 Place::~Place() = default;
 
-Region::Region() : Place(), country_("Abobia") {
-    add();
-}
 
-Region::Region(std::string name, std::string country) : Place(std::move(name)), country_(std::move(country)) {
-    add();
-}
+Region::Region() : Place(), country_("Abobia") {}
 
-Region::Region(Region &region) : Place(region.name_), country_(region.country_) {
-    add();
-}
+Region::Region(std::string name, std::string country, bool doAdd) : Place(std::move(name), doAdd),
+                                                                    country_(std::move(country)) {}
+
+Region::Region(Region &region) : Place(region.name_), country_(region.country_) {}
 
 Region::~Region() = default;
 
 void Region::print() const {
-    std::cout << "Region " << name_ << " in " << country_ << "\n";
+    std::cout << "Region \"" << name_ << "\" of " << country_ << "\n";
 }
 
-City::City() : Place(), region_(), nPeoples_(0) {
-    add();
-}
 
-City::City(std::string name, Region region, unsigned int nPeoples) :
-        Place(std::move(name)), region_(region), nPeoples_(nPeoples) {
-    add();
-}
+City::City() : Place(), region_(), nPeoples_(0) {}
+
+City::City(std::string name, Region &region, unsigned int nPeoples) :
+        Place(std::move(name)), region_(region), nPeoples_(nPeoples) {}
 
 City::City(City &city) :
-        City(city.name_, city.region_, city.nPeoples_) {
-    add();
-}
+        Place(std::move(city.name_)), region_(city.region_), nPeoples_(city.nPeoples_) {}
 
 void City::print() const {
-    std::cout << "City " << name_ << " in " << region_.name_ << " of " << region_.country_ << "\n";
+    std::cout << "City \"" << name_ << "\" with " << nPeoples_ << " people in " << region_.name_ << " of "
+              << region_.country_ << "\n";
 }
 
 City::~City() = default;
 
-Metropolis::Metropolis() : City(), top_(0) {
-    add();
-}
+
+Metropolis::Metropolis() : City(), top_(0) {}
 
 Metropolis::Metropolis(std::string name, Region &region, unsigned int nPeoples, unsigned short top) :
-        City(std::move(name), region, nPeoples), top_(top) {
-    add();
-}
+        City(std::move(name), region, nPeoples), top_(top) {}
 
 Metropolis::Metropolis(Metropolis &metropolis) :
-        Metropolis(metropolis.name_, metropolis.region_, metropolis.nPeoples_, metropolis.top_) {
-    add();
-}
+        City(metropolis.name_, metropolis.region_, metropolis.nPeoples_), top_(metropolis.top_) {}
 
 void Metropolis::print() const {
-    std::cout << "Metropolis #" << top_ << ": " << name_ << " in " << region_.name_ << " of " << region_.country_
+    std::cout << "Metropolis #" << top_ << " \"" << name_ << "\" with " << nPeoples_ << " people in " << region_.name_
+              << " of " << region_.country_
               << "\n";
 }
 
