@@ -1,5 +1,7 @@
 #include <iostream>
-#include "list"
+#include <list>
+
+#include "Money.h"
 
 using namespace std;
 
@@ -57,4 +59,13 @@ int main() {
     print(values);
     subDiff(values);
     print(values);
+
+    list<Money> wallet = {Money(53.31, "BYN"), Money(15, "USD"), Money(398.09, "RUB")};
+    print(wallet);
+    replaceElement(wallet, Money(15, "USD"), Money(30, "USD"));
+    print(wallet);
+    deleteElement(wallet, wallet.back());
+    print(wallet);
+    subDiff(wallet);
+    print(wallet);
 }
