@@ -1,4 +1,4 @@
 project(PL)
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(PL main.cpp listfunctions.cpp Money.h Vector.h pqfunctions.cpp)
+add_executable(PL main.cpp list_functions.cpp Money.h Vector.h priority_queue_functions.cpp)

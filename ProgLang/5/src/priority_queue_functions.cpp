@@ -12,6 +12,7 @@ void print(priority_queue<T> pq) {
     }
     cout << "\n";
 }
+
 template<class T>
 vector<T> &priorityQueueToVector(priority_queue<T> pq) {
     auto vec = new vector<T>;
@@ -34,9 +35,9 @@ priority_queue<T> &vectorToPriorityQueue(vector<T> vector) {
 
 
 template<class T>
-priority_queue<T> & replaceElement(priority_queue<T> &pq, const T &oldValue, const T &newValue) {
+priority_queue<T> &replaceElement(priority_queue<T> &pq, const T &oldValue, const T &newValue) {
     auto vector = priorityQueueToVector(pq);
-    for(auto iter = vector.begin(); iter != vector.end(); iter++) {
+    for (auto iter = vector.begin(); iter != vector.end(); iter++) {
         if (*iter == oldValue) {
             *iter = newValue;
             break;

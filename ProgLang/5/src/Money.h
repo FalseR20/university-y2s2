@@ -40,7 +40,6 @@ public:
 
     friend ostream &operator<<(ostream &out, const Money &money);
 
-    friend istream &operator>>(istream &in, Money &money);
 
     friend Money &min(Money &m1, Money &m2);
 
@@ -49,14 +48,8 @@ public:
 };
 
 ostream &operator<<(ostream &out, const Money &money) {
-//    out << "Money(" << money.currency << " " << money.value << ")";
-    out << money.currency << "@" << money.value;
+    out << money.value << "@" << money.currency;
     return out;
-}
-
-istream &operator>>(istream &in, Money &money) {
-    in >> money.value >> money.currency;
-    return in;
 }
 
 Money &min(Money &m1, Money &m2) {
