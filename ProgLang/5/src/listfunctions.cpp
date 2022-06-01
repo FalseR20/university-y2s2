@@ -1,7 +1,5 @@
-#include <iostream>
 #include <list>
-
-#include "Money.h"
+#include <iostream>
 
 using namespace std;
 
@@ -47,25 +45,4 @@ void subDiff(list<T> &values) {
     auto diff = maxValue - minValue;
     for (iter = values.begin(); iter != values.end(); iter++)
         *iter -= diff;
-}
-
-
-int main() {
-    list<double> values = {1.0, 2.0, 6.0, 4.0, 5.0};
-    print(values);
-    replaceElement(values, 6.0, 3.0);
-    print(values);
-    deleteElement(values, 2.0);
-    print(values);
-    subDiff(values);
-    print(values);
-
-    list<Money> wallet = {Money(53.31, "BYN"), Money(15, "USD"), Money(398.09, "RUB")};
-    print(wallet);
-    replaceElement(wallet, Money(15, "USD"), Money(30, "USD"));
-    print(wallet);
-    deleteElement(wallet, wallet.back());
-    print(wallet);
-    subDiff(wallet);
-    print(wallet);
 }

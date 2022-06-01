@@ -1,3 +1,6 @@
+#ifndef MONEY_H
+#define MONEY_H
+
 #include <string>
 #include <iostream>
 
@@ -24,12 +27,12 @@ public:
     }
 
 
-    Money& operator-=(Money& other) {
+    Money &operator-=(Money &other) {
         value -= other.value;
         return *this;
     }
 
-    Money& operator-(const Money& other) const {
+    Money &operator-(const Money &other) const {
         auto money = new Money(*this);
         money->value -= other.value;
         return *money;
@@ -40,6 +43,7 @@ public:
     friend istream &operator>>(istream &in, Money &money);
 
     friend Money &min(Money &m1, Money &m2);
+
     friend Money &max(Money &m1, Money &m2);
 
 };
@@ -56,9 +60,12 @@ istream &operator>>(istream &in, Money &money) {
 }
 
 Money &min(Money &m1, Money &m2) {
-    return (m1.value < m2.value)?m1:m2;
+    return (m1.value < m2.value) ? m1 : m2;
 }
 
 Money &max(Money &m1, Money &m2) {
-    return (m1.value > m2.value)?m1:m2;
+    return (m1.value > m2.value) ? m1 : m2;
 }
+
+
+#endif //MONEY_H
